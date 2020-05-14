@@ -1,9 +1,20 @@
-<ul >
+<h1>Events Minions</h1>
+<br>
+<div >
   {{#events}}
-    <li>
-        <h2>{{ title }}</h2>
+    <div class="container shadow p-3 mb-5 bg-white rounded">
+        <h2 class="text-primary">{{ title }}</h2>
         <p>{{ description }}</p>
         <p>{{ location}}</p>
-    </li>
+        <i onclick="myFunction(this)" class="fa fa-thumbs-up fa-2x text-info" ></i>
+        
+        <a href="/editEvent" class="btn btn-info ">
+          <span class="glyphicon glyphicon-edit"></span> Edit
+        </a>
+        <a href="#" class="btn btn-info ">
+          <span class="glyphicon glyphicon-trash"></span> Delete 
+        </a>
+    </div>
   {{/events}}
-</ul>
+</div>
+
