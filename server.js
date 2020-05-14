@@ -92,6 +92,7 @@ app.get('/editEvent', (req, res) => {
         }, // second argument: function with three args,
         // runs when server response received
         // body hold the return from the server
+
         (error, response, body) => {
             if (error) {
                 console.log('error:', error); // Print the error if one occurred
@@ -150,7 +151,7 @@ app.post('/event',
 
     });
 
-    app.get('/event',
+    app.post('/delEvent',
     urlencodedParser, // second argument - how to parse the uploaded content
     // into req.body
     (req, res) => {
@@ -159,9 +160,9 @@ app.post('/event',
         // using an environment variable. Here, the variable is passed 
         // to npm start inside package.json:
         //  "start": "SERVER=http://localhost:8082 node server.js",
-        request.delete(  // first argument: url + data + formats
+        request.post(  // first argument: url + data + formats
             {
-                url: SERVER + '/event',  // the microservice end point for adding an event
+                url: SERVER + '/delEvent',  // the microservice end point for adding an event
                 body: req.body,  // content of the form
                 headers: { // uploading json
                     "Content-Type": "application/json"
@@ -173,7 +174,36 @@ app.post('/event',
                 // body hold the return from the server
                 console.log('error:', error); // Print the error if one occurred
                 console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-                console.log(body); // print the return from the server microservice
+                //console.log(body); // print the return from the server microservice
+                res.redirect("/"); // redirect to the home page
+            });
+
+    });
+
+    app.post('/like',
+    urlencodedParser, // second argument - how to parse the uploaded content
+    // into req.body
+    (req, res) => {
+        // make a request to the backend microservice using the request package
+        // the URL for the backend service should be set in configuration 
+        // using an environment variable. Here, the variable is passed 
+        // to npm start inside package.json:
+        //  "start": "SERVER=http://localhost:8082 node server.js",
+        request.post(  // first argument: url + data + formats
+            {
+                url: SERVER + '/like',  // the microservice end point for adding an event
+                body: req.body,  // content of the form
+                headers: { // uploading json
+                    "Content-Type": "application/json"
+                },
+                json: true // response from server will be json format
+            },
+            (error, response, body) => {  // third argument: function with three args,
+                // runs when server response received
+                // body hold the return from the server
+                console.log('error:', error); // Print the error if one occurred
+                console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+                //console.log(body); // print the return from the server microservice
                 res.redirect("/"); // redirect to the home page
             });
 

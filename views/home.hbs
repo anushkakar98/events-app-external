@@ -6,17 +6,30 @@
         <h2 class="text-primary">{{ title }}</h2>
         <p>{{ description }}</p>
         <p>{{ location}}</p>
-        <p>{{id}}</p>
-        <i onclick="myFunction(this)" class="fa fa-thumbs-up fa-2x text-info" ></i>
+        <div class="row">
+            <div class="col-sm-2">
+                <form action="/like" method="post">
+                    <input type="hidden" id="id" name="id" value={{id}}>
+                    <span class="fa fa-thumbs-up fa-lg text-info" ><input type="submit" class="btn btn-info"  value="Like"></span>
+                    <p class="text-info">{{like}}</p>
+                </form>
+                
+            </div>
+            <div class="col-sm-2">
+                <form action="/delEvent" method="post">
+                    <input type="hidden" id="id" name="id" value={{id}}>
+                    <input type="submit" class="btn btn-info "  value="Delete">
+                </form>
+            </div>
+            <div class="col-sm-1">
+                <a href="/editEvent" class="btn btn-info ">
+                <span class="glyphicon glyphicon-edit"></span> Edit
+                </a>
+            </div>
+            <div class="col-sm-9">
+            </div>
+        </div>
         
-        <form action="/event" method="GET">
-             <input type="hidden" id="id" name="id" value={{id}}>
-             <input type="submit" class="btn btn-info "  value="Delete">
-        </form>
-
-        <a href="/editEvent" class="btn btn-info ">
-          <span class="glyphicon glyphicon-edit"></span> Edit
-        </a>
     </div>
   {{/events}}
 </div>
