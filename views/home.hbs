@@ -6,13 +6,16 @@
         <h2 class="text-primary">{{ title }}</h2>
         <p>{{ description }}</p>
         <p>{{ location}}</p>
+        <p>{{id}}</p>
         <i onclick="myFunction(this)" class="fa fa-thumbs-up fa-2x text-info" ></i>
         
+        <form action="/event" method="GET">
+             <input type="hidden" id="id" name="id" value={{id}}>
+             <input type="submit" class="btn btn-info "  value="Delete">
+        </form>
+
         <a href="/editEvent" class="btn btn-info ">
           <span class="glyphicon glyphicon-edit"></span> Edit
-        </a>
-        <a href="#" class="btn btn-info ">
-          <span class="glyphicon glyphicon-trash"></span> Delete 
         </a>
     </div>
   {{/events}}
