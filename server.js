@@ -181,6 +181,48 @@ app.post('/event',
 
 // create other get and post methods here - version, login,  etc
 
+function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+}
+
+var firebaseConfig = {
+    apiKey: "AIzaSyB-xWJfvxxY-OCCnItmF3LjF43nTDZBCQA",
+    authDomain: "dtc-attendee-206.firebaseapp.com",
+    databaseURL: "https://dtc-attendee-206.firebaseio.com",
+    projectId: "dtc-attendee-206",
+    storageBucket: "dtc-attendee-206.appspot.com",
+    messagingSenderId: "1089139767174",
+    appId: "1:1089139767174:web:ba8b31b4a9ee862b10de07"
+  };
+  
+  
+
+function onSignIn(googleUser) {
+    var id_token = googleUser.getAuthResponse().id_token;
+// Build Firebase credential with the Google ID token.
+    var credential = firebase.auth.GoogleAuthProvider.credential(id_token);
+
+// Sign in with credential from the Google user.
+    firebase.auth().signInWithCredential(credential).catch(function(error)
+    {
+  // Handle Errors here.
+        var errorCode = error.code;
+         var errorMessage = error.message;
+  // The email of the user's account used.
+        var email = error.email;
+  // The firebase.auth.AuthCredential type that was used.
+         var credential = error.credential;
+  // ...
+    })
+};
+
+  
+
+
 
 
 
